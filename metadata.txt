@@ -1,0 +1,17 @@
+[general]
+name=TAF Italia
+qgisMinimumVersion=3.10
+qgisMaximumVersion=4.99
+description=Scarica e converte i Punti Fiduciali (TAF) dall'Agenzia delle Entrate in CSV/WGS84 per QGIS. / Downloads and converts Fiducial Points (TAF) from the Italian Revenue Agency into CSV/WGS84 for QGIS.
+version=2.0
+author=Dott. Sarino Alfonso Grande
+email=sino.grande@gmail.com
+homepage=https://sinocloud.it
+about=ITA: TAF Italia automatizza il download dei Punti Fiduciali catastali dall'Agenzia delle Entrate, li converte dal sistema Cassini-Soldner/Gauss-Boaga al WGS84 (EPSG:4326) e li esporta in formato CSV caricabile direttamente in QGIS. ATTENZIONE: i dati potrebbero contenere punti outlier dovuti a errori nella conversione delle coordinate originali. ENG: TAF Italia automates the download of cadastral Fiducial Points from the Italian Revenue Agency, converts them from Cassini-Soldner/Gauss-Boaga to WGS84 (EPSG:4326) and exports them as CSV files directly loadable in QGIS. WARNING: data may contain outlier points due to errors in the original coordinate conversion.
+tracker=https://github.com/sinocloud/taf-italia-qgis/issues
+repository=https://github.com/sinocloud/taf-italia-qgis
+category=Vector
+tags=catasto,taf,fiduciali,agenzia entrate,italia,cassini soldner,punti fiduciali,csv,wgs84
+icon=icon.png
+experimental=False
+deprecated=False

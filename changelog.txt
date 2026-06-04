@@ -1,0 +1,21 @@
+2.0.0
+- Rinominato il plugin in "TAF Italia - Punti Fiduciali Downloader".
+- Output CSV con nomenclatura standardizzata: Tabella_Punti_Fiduciari_Area_[SIGLA].csv
+- Aggiunto disclaimer sui possibili punti outlier da errori di conversione coordinate.
+- Aggiunta informazione sul formato CSV e sistema di coordinate WGS84.
+- Risolto crash silenzioso del task dovuto a dipendenze mancanti (geopandas/shapely).
+- Rese le dipendenze pesanti opzionali con fallback automatico a CSV.
+- Sostituito pyqtSignal (non compatibile con QgsTask) con meccanismo nativo setProgress().
+- Corretto caricamento layer GPKG/CSV nel progetto QGIS.
+- Allineati suffissi uffici allo script originale funzionante.
+- Ottimizzate dimensioni immagini per la distribuzione.
+- Migliorato layout della finestra di dialogo con titolo, loghi e sezione disclaimer.
+- Compatibilità verificata per QGIS 3.10+ e QGIS 4.x (PyQt5/PyQt6).
+
+1.0.0
+- Prima release del plugin.
+- Implementato download automatico dei file TAF in base al comune inserito.
+- Aggiunta conversione dei punti storici Cassini-Soldner e Gauss-Boaga in formato WGS84 (EPSG:4326).
+- Creazione e caricamento automatico in QGIS del file GeoPackage (.gpkg).
+- Inserita interfaccia a schede con sezione Info, logo SinoCloud e collegamenti ai plugin dell'autore.
+- Assicurata piena compatibilità per QGIS 3 (PyQt5) e QGIS 4 (PyQt6).

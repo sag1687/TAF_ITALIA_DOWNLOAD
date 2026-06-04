@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AgenziaTafDialogBase</class>
+ <widget class="QDialog" name="AgenziaTafDialogBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>750</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TAF Italia - Punti Fiduciali Downloader</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="layout_logos">
+     <item>
+      <widget class="QLabel" name="label_logo_taf">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_app_title">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="center"&gt;&lt;span style="font-size:16pt; font-weight:700; color:#1a5276;"&gt;TAF Italia&lt;/span&gt;&lt;br/&gt;&lt;span style="font-size:9pt; color:#566573;"&gt;Punti Fiduciali Downloader per QGIS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_logo">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_search">
+     <property name="title">
+      <string>Ricerca Comune / Municipality Search</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QComboBox" name="combo_comuni">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_scarica">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>SCARICA PUNTI FIDUCIALI (CSV)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_log">
+     <property name="title">
+      <string>Log Attività / Activity Log</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QPlainTextEdit" name="txt_console">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progress_bar">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_info">
+     <property name="title">
+      <string>Info, Disclaimer &amp; Avvertenze</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_format_info">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;b&gt;📄 Formato Output:&lt;/b&gt; I dati vengono scaricati e convertiti in formato &lt;b&gt;CSV&lt;/b&gt; con coordinate &lt;b&gt;WGS84 (EPSG:4326)&lt;/b&gt;, caricati automaticamente come layer vettoriale in QGIS.&lt;br/&gt;Il file di output segue la nomenclatura: &lt;code&gt;Tabella_Punti_Fiduciari_Area_[SIGLA].csv&lt;/code&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_disclaimer_outlier">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style="color:#c0392b;"&gt;&lt;b&gt;⚠️ Avvertenza Outlier:&lt;/b&gt; I dati potrebbero contenere &lt;b&gt;punti outlier&lt;/b&gt; (coordinate anomale) generati da errori nella conversione dei sistemi di riferimento originali (Cassini-Soldner / Gauss-Boaga → WGS84). Si raccomanda di &lt;b&gt;verificare visivamente&lt;/b&gt; i punti e rimuovere eventuali anomalie prima dell'utilizzo professionale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_author">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="center"&gt;&lt;b&gt;Sviluppo:&lt;/b&gt; Dott. Sarino Alfonso Grande | &lt;b&gt;Web:&lt;/b&gt; &lt;a href="https://sinocloud.it"&gt;sinocloud.it&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_disclaimer">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;&lt;b&gt;[ITA]&lt;/b&gt; TAF Italia è un &lt;b&gt;tramite semplificato&lt;/b&gt; per il download dei &lt;b&gt;Punti Fiduciali (TAF)&lt;/b&gt; dall'Agenzia delle Entrate. I dati originali vengono trasformati automaticamente nel sistema di coordinate WGS84 (EPSG:4326) e salvati in formato CSV.&lt;br/&gt;&lt;b&gt;[ENG]&lt;/b&gt; TAF Italia is a &lt;b&gt;simplified bridge&lt;/b&gt; for downloading &lt;b&gt;Fiducial Points (TAF)&lt;/b&gt; from the Italian Revenue Agency. Original data is automatically reprojected into WGS84 (EPSG:4326) and saved as CSV.&lt;br/&gt;&lt;br/&gt;&lt;i&gt;Fonte / Source:&lt;/i&gt; &lt;a href="https://www.agenziaentrate.gov.it/"&gt;Agenzia delle Entrate&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Licenza / License:&lt;/i&gt; Open Data (CC-BY).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QComboBox" name="combo_altri_plugin"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_apri_plugin">
+          <property name="text">
+           <string>Apri Pagina</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
