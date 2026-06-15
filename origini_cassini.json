@@ -1,0 +1,222 @@
+{
+    "grandi_origini": {
+        "1 Vercelli (Punto ideale)": {
+            "lon": 8.20503700592792,
+            "lat": 45.4503841310644,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "2 Pordenone": {
+            "lon": 12.6604959542323,
+            "lat": 45.9545572219998,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "3 Monte Bronzone": {
+            "lon": 9.99092699253029,
+            "lat": 45.7089971312699,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "4 Lodi": {
+            "lon": 9.50299099633049,
+            "lat": 45.314135131017,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "5 Alessandria": {
+            "lon": 8.61134600288017,
+            "lat": 44.9146681309548,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "6 Monte Bignone": {
+            "lon": 7.73368901106307,
+            "lat": 43.873514131587,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "7 Forte Diamante": {
+            "lon": 8.93946800045486,
+            "lat": 44.4611211309037,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "8 Portonovo": {
+            "lon": 11.753357968449,
+            "lat": 44.532465161622,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "9 Siena (T. del Mangia)": {
+            "lon": 11.3322119741264,
+            "lat": 43.3182931470087,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "10 Urbino": {
+            "lon": 12.6362529498583,
+            "lat": 43.7251382340614,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "11 Monte Pennino": {
+            "lon": 12.8887439436131,
+            "lat": 43.101381272357,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "12 Roma (Monte Mario)": {
+            "lon": 12.4521289504753,
+            "lat": 41.9244032236029,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "13 Monte Ocre": {
+            "lon": 13.4431139325952,
+            "lat": 42.2564623879339,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "14 Valle Palombo": {
+            "lon": 14.2596269300275,
+            "lat": 41.6510336596702,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "15 Monte Terminio": {
+            "lon": 14.937319954194,
+            "lat": 40.8415810341947,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "16 Taranto": {
+            "lon": 17.2285265797089,
+            "lat": 40.4762075366933,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "17 Lecce": {
+            "lon": 18.1692754011523,
+            "lat": 40.352002398222,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "18 Monte Brutto": {
+            "lon": 16.4218872266603,
+            "lat": 39.1408855501613,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "19 Torre Titone": {
+            "lon": 12.5397329438513,
+            "lat": 37.8481152567156,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "20 Monte Etna (P. Lucia)": {
+            "lon": 14.9853359619193,
+            "lat": 37.7646732197467,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "21 Monte Castelluccio": {
+            "lon": 13.7792999245964,
+            "lat": 37.4160195748236,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "22 Mineo": {
+            "lon": 14.6924729437195,
+            "lat": 37.2670300398512,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "23 Sardegna (Punto ideale)": {
+            "lon": 9.11688999893754,
+            "lat": 40.0004051291263,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "24 Innsbruck": {
+            "lon": 11.3937579782814,
+            "lat": 47.2693021451331,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "25 Krimberg": {
+            "lon": 14.470997939341,
+            "lat": 45.9283895993539,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "26 Monte Cairo": {
+            "lon": 13.7595609283045,
+            "lat": 41.5418884856301,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "27 Francolise": {
+            "lon": 14.0637159276788,
+            "lat": 41.1826235965536,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "28 Cancello": {
+            "lon": 14.4301049327042,
+            "lat": 40.9938127554411,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "29 Miradois (Napoli)": {
+            "lon": 14.2554999292527,
+            "lat": 40.8636526820109,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "30 Monte Petrella": {
+            "lon": 13.6655649286095,
+            "lat": 41.3222044620803,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        },
+        "31 Marigliano": {
+            "lon": 14.4559859333186,
+            "lat": 40.9252277700024,
+            "falso_est": 0,
+            "falso_nord": 0,
+            "nota": "Grande Origine"
+        }
+    },
+    "piccole_origini": {}
+}

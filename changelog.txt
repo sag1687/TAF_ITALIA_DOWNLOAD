@@ -1,3 +1,43 @@
+2.5.1
+- Fix definitivo TypeError LabelPlacement/Quadrant in QGIS 4.0.3+ (Norrköping).
+
+2.5.0
+- Compatibilità QGIS 4.0+ (Norrköping): fix errore TypeError LabelPlacement/Quadrant enum per placement e quadOffset.
+- Aggiunta checkbox "Prova conversione WGS84": se manca la Piccola Origine nel database, usa la Grande Origine della provincia come fallback per convertire i punti Cassini-Soldner (recupera i punti che altrimenti sarebbero scartati).
+- Velocizzato download: verifica parallela (ThreadPoolExecutor) di tutti i 6 suffissi ufficio contemporaneamente invece che sequenziale.
+- Velocizzato download: download parallelo di tutti gli uffici validi con timeout ridotto (15s check, 30s download).
+- Aggiunto editor visivo Origini Locali: scheda dedicata con tabella modificabile, export modello CSV, import da file CSV/JSON.
+- Aggiunto export template origini (Scarica Modello Vuoto) per compilazione offline.
+- Aggiunto import origini da file (CSV/JSON) per carichi massivi.
+- Aggiunta generazione automatica colonna Link_Monografia per apertura web della monografia ufficiale.
+- Aggiunta mappa interattiva OSM con Nominatim geocoding e centratura automatica sul comune.
+- Aggiunto pulsante toggle console di log a scomparsa.
+- Aggiunta checkbox Raw Mode per scaricare coordinate originali senza trasformazione WGS84.
+- Aggiunta azione QGIS cliccabile "Apri Monografia PF" direttamente sul layer caricato.
+- Aggiunta tematizzazione automatica layer: marker triangolare verde, label PF/FG/COM, posizionamento alto-destra.
+- Aggiunto caricamento GeoPackage nativo PyQGIS (senza geopandas) con fallback automatico a CSV.
+- Pulizia generale del codice: rimozione file orfani (test_gppk.py, helper.md), __pycache__, spazi e righe vuote superflue, import ridondanti.
+- Questo plugin è stato scritto e rivisto con l'ausilio dell'intelligenza artificiale.
+
+2.4.0
+- Aggiunta nuova scheda "Fonti Originali e Download Diretto" con link ufficiali dell'Agenzia delle Entrate organizzati per regione.
+- Aggiornato disclaimer nella scheda Info con spiegazione tecnica dettagliata su come il plugin determina il sistema di coordinate (soglie Gauss-Boaga/Cassini-Soldner) e sulle 31 Grandi Origini Catastali vs origini comunali.
+- Aggiornata descrizione in metadata.txt con le stesse specifiche tecniche.
+
+2.3.0
+- Ottimizzazione codice sorgente: rimozione libreria esterna geopandas a favore delle API native PyQGIS per garantire la generazione del GeoPackage (GPKG) al 100% su qualsiasi configurazione.
+- Restyling completo della UI: design moderno "Flat" con stili CSS integrati, pulsanti interattivi e terminale di log in stile dark/tech per una maggiore leggibilità.
+- Implementazione di una mappa interattiva OSM nell'area di lavoro tramite QgsMapCanvas con supporto al panning e visualizzazione dinamica dell'estensione basata sulle coordinate del comune selezionato tramite Nominatim.
+- Aggiunto disclaimer legale avanzato che specifica la proprietà esclusiva dei dati TAF da parte dell'Agenzia delle Entrate, chiarendo che il plugin funge esclusivamente da alternativa tecnica al browser per l'accesso e il download dei dati pubblicamente disponibili, senza alterare né revendere il contenuto originale.
+- Certificazione di qualità avanzata: codice validato con flake8 senza alcun errore o avviso (120 char max-line-length).
+
+2.2.0
+- Nuova funzionalità: Aggiunta colonna `Nome_Comune` che decodifica automaticamente il codice Belfiore (Codice_Comune) nel nome in chiaro della città per ogni singolo punto fiduciale generato nel CSV.
+
+2.1.0
+- Risolti problemi di linting (F841, W504, F541) segnalati dal validatore QGIS Store.
+- Aggiunto file LICENSE fisico per la conformità con lo store.
+
 2.0.0
 - Rinominato il plugin in "TAF Italia - Punti Fiduciali Downloader".
 - Output CSV con nomenclatura standardizzata: Tabella_Punti_Fiduciari_Area_[SIGLA].csv

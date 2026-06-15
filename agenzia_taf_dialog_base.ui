@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>750</height>
+    <width>650</width>
+    <height>850</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,167 +15,192 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="layout_logos">
-     <item>
-      <widget class="QLabel" name="label_logo_taf">
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>80</height>
-        </size>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_app_title">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="center"&gt;&lt;span style="font-size:16pt; font-weight:700; color:#1a5276;"&gt;TAF Italia&lt;/span&gt;&lt;br/&gt;&lt;span style="font-size:9pt; color:#566573;"&gt;Punti Fiduciali Downloader per QGIS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_logo">
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>80</height>
-        </size>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_search">
-     <property name="title">
-      <string>Ricerca Comune / Municipality Search</string>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QComboBox" name="combo_comuni">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="editable">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_scarica">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>SCARICA PUNTI FIDUCIALI (CSV)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_log">
-     <property name="title">
-      <string>Log Attività / Activity Log</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QPlainTextEdit" name="txt_console">
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QProgressBar" name="progress_bar">
-        <property name="value">
-         <number>0</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_info">
-     <property name="title">
-      <string>Info, Disclaimer &amp; Avvertenze</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QLabel" name="label_format_info">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;b&gt;📄 Formato Output:&lt;/b&gt; I dati vengono scaricati e convertiti in formato &lt;b&gt;CSV&lt;/b&gt; con coordinate &lt;b&gt;WGS84 (EPSG:4326)&lt;/b&gt;, caricati automaticamente come layer vettoriale in QGIS.&lt;br/&gt;Il file di output segue la nomenclatura: &lt;code&gt;Tabella_Punti_Fiduciari_Area_[SIGLA].csv&lt;/code&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_disclaimer_outlier">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style="color:#c0392b;"&gt;&lt;b&gt;⚠️ Avvertenza Outlier:&lt;/b&gt; I dati potrebbero contenere &lt;b&gt;punti outlier&lt;/b&gt; (coordinate anomale) generati da errori nella conversione dei sistemi di riferimento originali (Cassini-Soldner / Gauss-Boaga → WGS84). Si raccomanda di &lt;b&gt;verificare visivamente&lt;/b&gt; i punti e rimuovere eventuali anomalie prima dell'utilizzo professionale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_author">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="center"&gt;&lt;b&gt;Sviluppo:&lt;/b&gt; Dott. Sarino Alfonso Grande | &lt;b&gt;Web:&lt;/b&gt; &lt;a href="https://sinocloud.it"&gt;sinocloud.it&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="openExternalLinks">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_disclaimer">
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;&lt;b&gt;[ITA]&lt;/b&gt; TAF Italia è un &lt;b&gt;tramite semplificato&lt;/b&gt; per il download dei &lt;b&gt;Punti Fiduciali (TAF)&lt;/b&gt; dall'Agenzia delle Entrate. I dati originali vengono trasformati automaticamente nel sistema di coordinate WGS84 (EPSG:4326) e salvati in formato CSV.&lt;br/&gt;&lt;b&gt;[ENG]&lt;/b&gt; TAF Italia is a &lt;b&gt;simplified bridge&lt;/b&gt; for downloading &lt;b&gt;Fiducial Points (TAF)&lt;/b&gt; from the Italian Revenue Agency. Original data is automatically reprojected into WGS84 (EPSG:4326) and saved as CSV.&lt;br/&gt;&lt;br/&gt;&lt;i&gt;Fonte / Source:&lt;/i&gt; &lt;a href="https://www.agenziaentrate.gov.it/"&gt;Agenzia delle Entrate&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Licenza / License:&lt;/i&gt; Open Data (CC-BY).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-        <property name="openExternalLinks">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QComboBox" name="combo_altri_plugin"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btn_apri_plugin">
-          <property name="text">
-           <string>Apri Pagina</string>
+     <widget class="QWidget" name="tab_download">
+      <attribute name="title">
+       <string>Download e Mappa</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_tab1">
+       <item>
+        <layout class="QHBoxLayout" name="layout_logos">
+         <item>
+          <widget class="QLabel" name="label_logo_taf">
+           <property name="minimumSize">
+            <size><width>140</width><height>140</height></size>
+           </property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_app_title">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="center"&gt;&lt;span style="font-size:16pt; font-weight:700; color:#c7d0b8;"&gt;TAF Italia&lt;/span&gt;&lt;br/&gt;&lt;span style="font-size:9pt; color:#a1af91;"&gt;Punti Fiduciali Downloader per QGIS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_logo">
+           <property name="minimumSize">
+            <size><width>70</width><height>70</height></size>
+           </property>
+           <property name="alignment"><set>Qt::AlignCenter</set></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_search">
+         <property name="title"><string>Ricerca Comune / Municipality Search</string></property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QComboBox" name="combo_comuni">
+            <property name="minimumSize"><size><width>0</width><height>35</height></size></property>
+            <property name="editable"><bool>true</bool></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_scarica">
+            <property name="minimumSize"><size><width>0</width><height>40</height></size></property>
+            <property name="text"><string>SCARICA E MOSTRA IN MAPPA (OSM)</string></property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="map_container" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>250</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_map">
+          <property name="margin">
+           <number>0</number>
           </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="progress_bar">
+         <property name="value"><number>0</number></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_toggle_log">
+         <property name="text"><string>🔽 Mostra Console di Log</string></property>
+         <property name="checkable"><bool>true</bool></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_log">
+         <property name="title"><string>Log Attività / Activity Log</string></property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QPlainTextEdit" name="txt_console">
+            <property name="readOnly"><bool>true</bool></property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeHint"><size><width>20</width><height>40</height></size></property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_info">
+      <attribute name="title">
+       <string>Informazioni e Licenza</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_tab2">
+       <item>
+        <widget class="QGroupBox" name="groupBox_info">
+         <property name="title"><string>Info, Disclaimer &amp; Avvertenze</string></property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_format_info">
+            <property name="text"><string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;b&gt;📄 Formato Output:&lt;/b&gt; I dati vengono scaricati e convertiti in formato &lt;b&gt;CSV/GPKG&lt;/b&gt; con coordinate &lt;b&gt;WGS84 (EPSG:4326)&lt;/b&gt;, caricati automaticamente come layer in QGIS.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string></property>
+            <property name="wordWrap"><bool>true</bool></property>
+           </widget>
+          </item>
+          <item>
+            <widget class="QLabel" name="label_disclaimer_outlier">
+             <property name="text"><string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p style="color:#e67e22;"&gt;&lt;b&gt;Avvertenza Tecnica - Sistemi di Riferimento:&lt;/b&gt;&lt;/p&gt;
+&lt;p style="color:#ecf0f1; font-size:9pt;"&gt;
+Il plugin determina automaticamente il sistema di riferimento originale dal valore della coordinata Est presente nel file TAF:
+&lt;/p&gt;
+&lt;ul style="color:#bdc3c7; font-size:9pt; margin-left:10px;"&gt;
+&lt;li&gt;&lt;b&gt;1.300.000 &amp;lt; Est &amp;lt; 1.900.000&lt;/b&gt; = Gauss-Boaga Fuso Ovest (EPSG:3003), trasformato in WGS84.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;2.300.000 &amp;lt; Est &amp;lt; 2.900.000&lt;/b&gt; = Gauss-Boaga Fuso Est (EPSG:3004), trasformato in WGS84.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;|Est| &amp;lt; 500.000&lt;/b&gt; = Cassini-Soldner, trasformato in WGS84 con origine catastale locale.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p style="color:#e67e22; font-size:9pt;"&gt;
+&lt;b&gt;Nota sulle Origini Catastali:&lt;/b&gt; Il Catasto italiano storico usa il sistema Cassini-Soldner con origini specifiche per ogni comune catastale. Per ragioni pratiche, il plugin adotta il modello delle 31 Grandi Origini nazionali, che raggruppano pi&amp;ugrave; province sotto un'unica origine approssimata. Per comuni lontani dall'origine "grande" assegnata, lo scostamento pu&amp;ograve; raggiungere decine di metri. Per precisione millimetrica servono le coordinate esatte dell'origine d'impianto del singolo comune. Si raccomanda verifica visiva dei punti prima dell'uso professionale.
+&lt;/p&gt;
+&lt;p style="color:#e67e22; font-size:9pt;"&gt;
+I dati potrebbero inoltre contenere &lt;b&gt;punti outlier&lt;/b&gt; (coordinate anomale) generati da errori intrinseci nella trasformazione matematica dai sistemi di riferimento storici.
+&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</string></property>
+             <property name="wordWrap"><bool>true</bool></property>
+            </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_author">
+            <property name="text"><string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="center"&gt;&lt;b&gt;Sviluppo:&lt;/b&gt; Dott. Sarino Alfonso Grande | &lt;b&gt;Web:&lt;/b&gt; &lt;a href="https://sinocloud.it"&gt;sinocloud.it&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string></property>
+            <property name="openExternalLinks"><bool>true</bool></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_disclaimer">
+            <property name="text"><string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;&lt;b&gt;[ITA]&lt;/b&gt; I dati scaricati tramite TAF Italia provengono direttamente dai server ufficiali dell'&lt;b&gt;Agenzia delle Entrate&lt;/b&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string></property>
+            <property name="wordWrap"><bool>true</bool></property>
+            <property name="openExternalLinks"><bool>true</bool></property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item><widget class="QComboBox" name="combo_altri_plugin"/></item>
+            <item><widget class="QPushButton" name="btn_apri_plugin"><property name="text"><string>Apri Pagina</string></property></widget></item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeHint"><size><width>20</width><height>40</height></size></property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_fonti">
+      <attribute name="title">
+       <string>Fonti Originali TAF</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_tab3">
+       <item>
+        <widget class="QTextBrowser" name="txt_fonti">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
