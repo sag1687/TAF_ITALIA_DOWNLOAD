@@ -30,6 +30,7 @@ except ImportError:
 
 from .agenzia_taf_dialog import AgenziaTafDialog
 
+
 class DownloadTafTask(QgsTask):
     """Task asincrono per il download e la conversione dei dati TAF.
 
@@ -110,7 +111,10 @@ class DownloadTafTask(QgsTask):
                     QgsProject.instance().addMapLayer(layer)
 
                     # 1. Stile (Marker Triangolare Verde)
-                    symbol = QgsMarkerSymbol.createSimple({'name': 'triangle', 'color': '#88b04b', 'outline_color': 'black', 'size': '3'})
+                    symbol = QgsMarkerSymbol.createSimple({
+                        'name': 'triangle', 'color': '#88b04b',
+                        'outline_color': 'black', 'size': '3',
+                    })
                     layer.setRenderer(QgsSingleSymbolRenderer(symbol))
                     # 2. Labeling (PFXX/FGYY/COMZZZ)
                     label_settings = QgsPalLayerSettings()
@@ -141,7 +145,11 @@ class DownloadTafTask(QgsTask):
                     layer.setLabelsEnabled(True)
                     layer.setLabeling(labeling)
                     # 3. Action Monografia
-                    action = QgsAction(QgsAction.OpenUrl, "Apri Monografia PF", "[%Link_Monografia%]", "", False, "Apri Monografia ufficiale dell'Agenzia delle Entrate")
+                    action = QgsAction(
+                        QgsAction.OpenUrl, "Apri Monografia PF",
+                        "[%Link_Monografia%]", "", False,
+                        "Apri Monografia ufficiale dell'Agenzia delle Entrate",
+                    )
                     action.setActionScopes({'Feature', 'Canvas'})
                     layer.actions().addAction(action)
                     layer.triggerRepaint()

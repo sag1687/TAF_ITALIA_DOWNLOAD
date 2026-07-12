@@ -1,95 +1,137 @@
-# TAF Italia - QGIS Plugin
+# 📍 TAF Italia for QGIS
 
-![QGIS Minimum Version](https://img.shields.io/badge/QGIS-3.10%2B-green?logo=qgis)
-![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)
-![Release](https://img.shields.io/badge/Version-2.5.1-orange)
+[![QGIS Version](https://img.shields.io/badge/QGIS-3.10%2B%20%7C%204.0-589632?logo=qgis&logoColor=white)](https://qgis.org/)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![PyQt5 / PyQt6](https://img.shields.io/badge/Qt-PyQt5%20%7C%20PyQt6-41cd52?logo=qt&logoColor=white)](https://www.riverbankcomputing.com/software/pyqt/)
+[![Code style: flake8](https://img.shields.io/badge/lint-flake8-informational)](https://flake8.pycqa.org/)
+[![Version: 2.6.0](https://img.shields.io/badge/Version-2.6.0-blue.svg)]()
 
-**TAF Italia** è un plugin per QGIS progettato per semplificare e automatizzare il lavoro dei professionisti tecnici italiani (geometri, ingegneri, architetti, periti) che operano in ambito catastale e topografico. 
-Il plugin permette di scaricare automaticamente gli archivi dei **Punti Fiduciali (TAF)** direttamente dai server dell'Agenzia delle Entrate, convertirli dai sistemi nativi (Cassini-Soldner o Gauss-Boaga) nel sistema globale WGS84 (EPSG:4326) e caricarli istantaneamente in QGIS pronti per l'uso.
+> **IT** · Scarica i **Punti Fiduciali catastali (TAF)** dai server ufficiali dell'Agenzia delle Entrate, li converte da Cassini-Soldner/Gauss-Boaga a **WGS84 (EPSG:4326)** e li carica in QGIS già tematizzati, con link alle monografie ufficiali.
+>
+> **EN** · Downloads the **cadastral Fiducial Points (TAF)** from the official servers of the Italian Revenue Agency, converts them from Cassini-Soldner/Gauss-Boaga to **WGS84 (EPSG:4326)** and loads them into QGIS already styled, with links to the official monographs.
 
-![Screenshot del Plugin](TAF.png)
-
-## ✨ Funzionalità Principali
-
-- **Download Diretto e Sicuro**: Scarica i dati TAF aggiornati direttamente dall'Agenzia delle Entrate, gestendo in automatico le connessioni e gli eventuali ritardi dei server statali.
-- **Riconoscimento Automatico CRS**: Identifica il sistema di coordinate di partenza analizzando i valori delle coordinate (soglie Gauss-Boaga Ovest/Est, Cassini-Soldner).
-- **Conversione Accurata in WGS84**: 
-  - Da *Gauss-Boaga* (EPSG 3003/3004) a *WGS84* (EPSG 4326) usando le librerie standard.
-  - Da *Cassini-Soldner* a *WGS84* usando parametri matematici complessi (Bursa-Wolf Rome 40).
-- **Integrazione Immediata in QGIS**: Carica i dati estratti direttamente nel progetto corrente come layer GeoPackage (GPKG) o testuale (CSV), senza bisogno di passaggi manuali.
-- **Tematizzazione Automatica (Stile)**: Applica in automatico uno stile predefinito (simbolo a triangolo verde tipico dei punti fiduciali) e abilita le etichette con il nome del punto (es. `PF01/0010/A234`).
-- **Azione "Monografia" Rapida**: Aggiunge un'Azione di QGIS che permette, cliccando su un Punto Fiduciale in mappa, di aprire direttamente nel browser la pagina per scaricare la relativa monografia.
-- **Gestione Origini Locali**: Per i punti storici in Cassini-Soldner, include un editor visivo per inserire o modificare l'origine catastale (Emanazione) specifica del comune, migliorando l'accuratezza rispetto all'uso delle sole Grandi Origini provinciali.
-
-## 🚀 Installazione
-
-### Via QGIS Plugin Repository (Consigliato)
-1. Aprire QGIS.
-2. Andare su **Plugin > Gestisci e Installa Plugin...**
-3. Cercare **TAF Italia** e cliccare su **Installa Plugin**.
-
-### Installazione Manuale (da file ZIP)
-1. Scaricare l'ultima release in formato `.zip` dalla pagina [Releases](https://github.com/sag1687/TAF_ITALIA_DOWNLOAD/releases) (se disponibile) o scaricare il codice sorgente tramite il pulsante **Code > Download ZIP**.
-2. Aprire QGIS.
-3. Andare su **Plugin > Gestisci e Installa Plugin... > Installa da ZIP**.
-4. Selezionare il file scaricato e confermare.
-
-## 💻 Guida all'Uso
-
-1. Aprire il plugin dalla barra degli strumenti o dal menu **Web > TAF Italia**.
-2. **Selezionare la Provincia** di interesse dal menu a tendina.
-3. *(Opzionale)* Personalizzare la directory di salvataggio dei file elaborati.
-4. *(Opzionale)* Configurare eventuali **Origini Locali** usando l'apposito editor se si lavora in aree con sistemi Cassini-Soldner specifici e si necessita di alta precisione.
-5. Cliccare su **Scarica ed Elabora**.
-6. Il plugin elaborerà i file: al termine dell'elaborazione comparirà automaticamente il layer vettoriale sulla mappa.
-7. Usare lo strumento di "Informazioni Elementi" (o le Azioni QGIS attivate col tasto destro) per cliccare su un punto ed aprire rapidamente la **Monografia** associata dal sito dell'Agenzia delle Entrate.
+**🌐 Lingua / Language:** [🇮🇹 Italiano](#-italiano) · [🇬🇧 English](#-english)
 
 ---
 
-## 🛠 Analisi Tecnica — Ha senso? Funziona?
+## 📸 Screenshot
 
-**Sì, il plugin è tecnicamente valido e risolve un problema reale.** Ogni giorno tecnici catastali, geometri e ingegneri in Italia devono scaricare e lavorare con i Punti Fiduciali. Il flusso ufficiale (browser Agenzia Entrate → TAF → conversione manuale con tool esterni → QGIS) è lento e ripetitivo. Questo plugin automatizza tutto con pochi click.
+| Scheda Download e Mappa / Download and Map tab | Scheda Informazioni / Information tab |
+|---|---|
+| ![Download](screenshots/taf_download_tab.png) | ![Info](screenshots/taf_info_tab.png) |
 
-### Cosa funziona correttamente
+> **IT** · A sinistra la scheda principale con ricerca comune, mappa OSM e console di log; a destra la scheda informazioni con avvertenze tecniche e menù a tendina degli altri plugin. · **EN** · On the left the main tab with municipality search, OSM map and log console; on the right the information tab with technical warnings and the drop-down of the other plugins.
 
-- **Download HTTP**: usa session requests con retry e backoff, gestisce server non responsivi e content-type HTML (assenza dati). La logica di resume evita download ripetuti.
-- **Riconoscimento CRS**: le soglie sui valori di Est (GB Ovest 1.3M–1.9M, GB Est 2.3M–2.9M, Cassini <500K) sono empiriche ma consolidate nella pratica catastale italiana.
-- **Conversione Gauss-Boaga → WGS84**: usa i codici EPSG ufficiali (3003/3004 → 4326) tramite pyproj/PROJ. La trasformazione è esatta perché i parametri sono standardizzati.
-- **Conversione Cassini-Soldner → WGS84**: formula matematica corretta (proiezione Cassini su ellissoide Bessel 1841). I parametri Bursa-Wolf (`-104.1,-49.1,-9.9,0.971,-2.917,0.714,-11.68`) sono il set Rome 40 → WGS84, adeguato per l'Italia peninsulare con accuratezza metrica.
-- **Architettura QGIS**: Utilizza un `QgsTask` asincrono per non bloccare l'interfaccia utente durante il download, supporta segnali `progressChanged`/`taskCompleted`/`taskTerminated`, compatibilità nativa tra PyQt5 e PyQt6.
-- **Generazione GPKG nativa**: usa `QgsVectorFileWriter.writeAsVectorFormatV3` senza dipendenze esterne (es. no geopandas, no pandas, no shapely).
-- **Tematizzazione automatica**: renderer triangolare, labeling, action per apertura monografia via browser — tutto implementato via API QGIS standard.
+## 🇮🇹 Italiano
 
-### Limitazioni tecniche note e Risoluzioni
+### Cos'è
+Ogni giorno tecnici catastali, geometri e ingegneri devono scaricare e usare i Punti Fiduciali. Il flusso ufficiale (browser Agenzia delle Entrate → file TAF → conversione manuale con tool esterni → QGIS) è lento e ripetitivo: **TAF Italia** automatizza tutto in un click.
 
-1. **Origini Cassini-Soldner**: Il catasto storico italiano conta oltre 818 centri di emanazione (piccole origini). Il plugin usa per default 31 Grandi Origini raggruppate per provincia. Usare un'origine provinciale per punti di un comune che afferisce a una piccola origine diversa può produrre scostamenti di decine di metri. **Soluzione**: l'editor "Origini Locali" integrato nel plugin permette di inserire l'origine esatta del proprio comune (se nota).
-2. **Parametri Bursa-Wolf fissi**: Il set Rome 40 non è ottimale per tutto il territorio nazionale (es. Sicilia e Sardegna hanno datum locali diversi). Per un lavoro di precisione catastale sub-metrica servirebbero parametri regionali.
-3. **Soglie di rilevamento CRS**: Se un valore di Est cade esattamente al confine tra due sistemi (es. ~1.3M o ~2.3M), il riconoscimento potrebbe essere ambiguo. I TAF storici con coordinate Cassini non dovrebbero superare 500 km dal centro di emanazione, ma non è garantito in caso di errori nei dati nativi.
-4. **Affidabilità server ADE**: I server dell'Agenzia delle Entrate non hanno garanzie di uptime. Il plugin gestisce i timeout ma non può aggirare l'indisponibilità totale del servizio.
+### ✨ Funzionalità
+| | Funzionalità | Descrizione |
+|---|---|---|
+| ⬇️ | **Download automatico** | Session HTTP con retry/backoff; verifica e download **paralleli** di tutti gli uffici provinciali (fino a 6 per provincia). |
+| 🧭 | **Riconoscimento CRS automatico** | Dalle soglie della coordinata Est: Gauss-Boaga Fuso Ovest (EPSG:3003), Fuso Est (EPSG:3004) o Cassini-Soldner. |
+| 🔁 | **Conversione a WGS84** | Gauss-Boaga via EPSG ufficiali (pyproj/PROJ); Cassini-Soldner su ellissoide Bessel con parametri Bursa-Wolf Roma40→WGS84. |
+| 🗺️ | **Mappa OSM integrata** | Anteprima OpenStreetMap con geocoding Nominatim e centratura automatica sul comune scelto. |
+| 🏷️ | **Tematizzazione automatica** | Marker triangolare verde, etichette `PF/FG/COM`, azione cliccabile "Apri Monografia PF" sul layer. |
+| 🗃️ | **Output CSV/GPKG** | GeoPackage nativo PyQGIS (senza geopandas), con fallback CSV. |
+| 🏛️ | **Editor Origini Locali** | Scheda dedicata con tabella modificabile delle Piccole Origini Cassini-Soldner: export modello CSV, import CSV/JSON, salvataggio a caldo. |
+| 🌐 | **Interfaccia bilingue IT/EN** | Pulsante bandiera 🇮🇹/🇬🇧 accanto al titolo; la lingua scelta viene ricordata. |
+| 🎨 | **Tema scuro "slate blue"** | Tema condiviso della famiglia di plugin SinoCloud (lo stesso di SARIAG e STAC Browser). |
+| 🔗 | **Scheda Info con menù a tendina** | Elenco degli altri plugin dell'autore con apertura diretta del repository GitHub. |
 
-### Casi d'uso reali
+### 🚀 Come funziona
+1. Apri **TAF Italia** dalla toolbar o dal menù **Vettore**.
+2. Nella scheda **Download e Mappa** digita o scegli il comune (completamento automatico) e premi **SCARICA E MOSTRA IN MAPPA (OSM)**.
+3. Il plugin scarica i file TAF della provincia, riconosce il sistema di riferimento, converte in WGS84 e carica i layer già tematizzati; la console di log (a scomparsa) mostra ogni passaggio.
+4. Click destro su un punto → **Apri Monografia PF** per la monografia ufficiale nel browser.
+5. Nella scheda **Origini Locali** puoi inserire le Piccole Origini del tuo comune per la massima precisione (vedi Avvertenze).
+6. La scheda **Fonti Originali TAF** elenca i link ufficiali di download per tutte le province.
 
-- **Professionisti tecnici**: geometri e ingegneri che devono quotidianamente scaricare TAF per aggiornamento catastale e rilievi.
-- **Studi associati**: decine di comuni gestiti, dove l'automazione del download fa risparmiare molte ore.
-- **Formazione e didattica**: laboratori GIS su dati catastali reali.
+### ⚠️ Avvertenze e limitazioni tecniche
+1. **Origini Cassini-Soldner**: il Catasto storico conta oltre **818 piccole origini** comunali; di default il plugin adotta le **31 Grandi Origini** nazionali raggruppate per provincia. Per comuni lontani dall'origine assegnata lo scostamento può raggiungere **decine di metri**. *Soluzione*: l'editor **Origini Locali** permette di inserire l'origine esatta del proprio comune.
+2. **Parametri Bursa-Wolf fissi**: il set Roma40 non è ottimale per tutto il territorio (Sicilia e Sardegna hanno datum locali diversi). Per precisione catastale (<1 m) servono parametri regionali.
+3. **Soglie di rilevamento CRS**: valori di Est al confine tra due sistemi (~1.3M o ~2.3M) possono dare riconoscimento ambiguo.
+4. **Affidabilità server ADE**: il plugin gestisce i timeout ma non può aggirare l'indisponibilità del servizio.
+5. **Punti outlier**: possibili coordinate anomale generate dalla trasformazione dai sistemi storici — verifica visiva raccomandata prima dell'uso professionale.
 
-### Conclusione
+Opzioni utili: **Scarica TAF Grezzi** (nessuna trasformazione) e **Prova conversione WGS84** (usa la Grande Origine come fallback).
 
-Il plugin non è un software di certificazione metrica, ma un **tool operativo che automatizza il workflow TAF**. Per usi tecnici ordinari (accuratezza sub-decimetrica non richiesta, inquadramenti di massima, sopralluoghi, planimetrie, allineamento catastale rapido) è pienamente funzionante e sufficiente. Per certificazioni metriche di altissima precisione, verificare e applicare sempre le origini Cassini-Soldner locali e i parametri di trasformazione specifici assistiti da un geodeta o specialista abilitato.
+> Il plugin non è un software di certificazione metrica, ma un tool operativo che automatizza il workflow TAF. Per certificazioni di precisione, verificare origini locali e parametri con un geodeta abilitato.
 
-## 📋 Requisiti
+### 🛠️ Installazione
+1. Scarica il repository o il pacchetto ZIP.
+2. In QGIS: **Plugin → Gestisci e installa plugin… → Installa da ZIP**, oppure copia la cartella in `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/` (Linux) / `%APPDATA%\QGIS\QGIS3\profiles\default\python\plugins\` (Windows).
+3. Attiva **TAF Italia** dall'elenco dei plugin installati. Richiede i moduli Python `requests` e `pyproj` (inclusi nelle distribuzioni QGIS standard) e una connessione internet.
 
-- **QGIS 3.10** o superiore (testato ed ottimizzato per compatibilità anche su QGIS 4.x / PyQt6)
-- Connessione a Internet attiva (per il download dei dati dall'ADE)
-- *Nessun plugin o libreria esterna richiesto!* Il plugin fa uso interamente delle potenti API native di QGIS e Python.
+---
 
-## 👨‍💻 Autore e Crediti
+## 🇬🇧 English
 
-Sviluppato da **Dott. Sarino Alfonso Grande** — [sinocloud.it](https://sinocloud.it)  
-I dati catastali manipolati sono di titolarità dell'Agenzia delle Entrate italiana.
+### What it is
+Every day cadastral technicians, surveyors and engineers need to download and use the Italian Fiducial Points. The official flow (Revenue Agency website → TAF files → manual conversion with external tools → QGIS) is slow and repetitive: **TAF Italia** automates everything in one click.
 
-*Questo plugin è stato scritto e rivisto con l'ausilio dell'intelligenza artificiale.*
+### ✨ Features
+| | Feature | Description |
+|---|---|---|
+| ⬇️ | **Automatic download** | HTTP session with retry/backoff; **parallel** check and download of all the provincial offices (up to 6 per province). |
+| 🧭 | **Automatic CRS detection** | From the Easting value thresholds: Gauss-Boaga West zone (EPSG:3003), East zone (EPSG:3004) or Cassini-Soldner. |
+| 🔁 | **WGS84 conversion** | Gauss-Boaga through official EPSG codes (pyproj/PROJ); Cassini-Soldner on the Bessel ellipsoid with Rome40→WGS84 Bursa-Wolf parameters. |
+| 🗺️ | **Embedded OSM map** | OpenStreetMap preview with Nominatim geocoding and automatic centering on the chosen municipality. |
+| 🏷️ | **Automatic styling** | Green triangular marker, `PF/FG/COM` labels, clickable "Open PF Monograph" action on the layer. |
+| 🗃️ | **CSV/GPKG output** | Native PyQGIS GeoPackage (no geopandas), with CSV fallback. |
+| 🏛️ | **Local Origins editor** | Dedicated tab with an editable table of the Cassini-Soldner Small Origins: CSV template export, CSV/JSON import, hot reload. |
+| 🌐 | **Bilingual IT/EN interface** | Flag button 🇮🇹/🇬🇧 next to the title; the chosen language is remembered. |
+| 🎨 | **"Slate blue" dark theme** | Shared theme of the SinoCloud plugin family (the same as SARIAG and STAC Browser). |
+| 🔗 | **Info tab with drop-down** | List of the author's other plugins with direct GitHub repository opening. |
 
-## 📄 Licenza
+### 🚀 How it works
+1. Open **TAF Italia** from the toolbar or the **Vector** menu.
+2. In the **Download and Map** tab type or pick the municipality (autocomplete) and press **DOWNLOAD AND SHOW ON MAP (OSM)**.
+3. The plugin downloads the province's TAF files, detects the reference system, converts to WGS84 and loads the already-styled layers; the collapsible log console shows every step.
+4. Right-click a point → **Open PF Monograph** for the official monograph in the browser.
+5. In the **Local Origins** tab you can enter the Small Origins of your municipality for maximum precision (see Warnings).
+6. The **Original TAF Sources** tab lists the official download links for every province.
 
-Rilasciato sotto licenza open-source [GNU General Public License (GPL) version 2](LICENSE).
+### ⚠️ Technical warnings and limitations
+1. **Cassini-Soldner origins**: the historical cadastre has more than **818 municipal small origins**; by default the plugin adopts the **31 national Great Origins** grouped by province. For municipalities far from their assigned origin the offset can reach **tens of metres**. *Solution*: the **Local Origins** editor lets you enter the exact origin of your municipality.
+2. **Fixed Bursa-Wolf parameters**: the Rome40 set is not optimal for the whole territory (Sicily and Sardinia have different local datums). Cadastral precision (<1 m) requires regional parameters.
+3. **CRS detection thresholds**: Easting values at the boundary between two systems (~1.3M or ~2.3M) can be ambiguous.
+4. **Revenue Agency server reliability**: the plugin handles timeouts but cannot work around service unavailability.
+5. **Outlier points**: anomalous coordinates produced by the transformation from the historical systems are possible — visual verification is recommended before professional use.
+
+Useful options: **Download raw TAF** (no transformation) and **Try WGS84 conversion** (uses the Great Origin as fallback).
+
+> The plugin is not a metric certification software but an operational tool that automates the TAF workflow. For precision certifications, verify local origins and parameters with a qualified geodesist.
+
+### 🛠️ Installation
+1. Download the repository or the ZIP package.
+2. In QGIS: **Plugins → Manage and Install Plugins… → Install from ZIP**, or copy the folder into `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/` (Linux) / `%APPDATA%\QGIS\QGIS3\profiles\default\python\plugins\` (Windows).
+3. Enable **TAF Italia** in the installed plugins list. Requires the `requests` and `pyproj` Python modules (bundled with standard QGIS distributions) and an internet connection.
+
+---
+
+## 📊 Fonte dati / Data source
+Dati © **Agenzia delle Entrate** — servizio [TAF](https://www1.agenziaentrate.gov.it/servizi/TafDis/download.php), Licenza Open Data **CC-BY**. Il plugin non è affiliato all'Agenzia delle Entrate. / Data © **Italian Revenue Agency** — [TAF](https://www1.agenziaentrate.gov.it/servizi/TafDis/download.php) service, **CC-BY** Open Data license. The plugin is not affiliated with the Italian Revenue Agency.
+
+## 👤 Autore / Author
+Sviluppato da / Developed by **Dott. Sarino Alfonso Grande** — *scritto e rivisto con l'ausilio dell'AI / written and reviewed with the help of AI*.
+- ✉️ **Email:** [sino.grande@gmail.com](mailto:sino.grande@gmail.com)
+- 🌐 **Sito ufficiale / Official website:** [sinocloud.it](https://sinocloud.it)
+- 🐙 **GitHub:** [sag1687](https://github.com/sag1687)
+
+### Altri plugin dell'autore / Other plugins by the author
+| Plugin | Repository |
+|---|---|
+| **SARIAG** | [github.com/sag1687/sariag](https://github.com/sag1687/sariag) |
+| **STAC Browser** | [github.com/sag1687/stac_browser](https://github.com/sag1687/stac_browser) |
+| **GeoBridge** | [github.com/sag1687/geobridge](https://github.com/sag1687/geobridge) |
+| **Quick CRS Fixer** | [github.com/sag1687/CRS_FIXER](https://github.com/sag1687/CRS_FIXER) |
+| **GeoCSV Mapper** | [github.com/sag1687/GeoCSV-Mapper](https://github.com/sag1687/GeoCSV-Mapper) |
+| **Q-Press** | [github.com/sag1687/q_press](https://github.com/sag1687/q_press) |
+| **QGIS Ledger** | [github.com/sag1687/qgis_ledger](https://github.com/sag1687/qgis_ledger) |
+
+## 📜 Licenza / License
+**GPL-2.0** — Copyright © 2026 Dott. Sarino Alfonso Grande.
+Questo plugin è software libero, ridistribuibile secondo i termini della GNU GPL v2. / This plugin is free software, redistributable under the terms of the GNU GPL v2.

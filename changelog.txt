@@ -1,3 +1,17 @@
+2.6.0
+- Nuovo tema scuro "slate blue" condiviso della famiglia di plugin SinoCloud (lo stesso di SARIAG e STAC Browser); sostituisce il precedente Forest Theme.
+- Interfaccia completamente bilingue italiano/inglese con pulsante bandiera 🇮🇹/🇬🇧 accanto al titolo; la scelta viene ricordata tra le sessioni.
+- Menù a tendina nella scheda Info popolato dal catalogo condiviso dei plugin dell'autore (TAF Italia escluso), con descrizione bilingue e apertura del repository GitHub.
+- Scheda "Fonti Originali TAF" e scheda "Origini Locali" tradotte in entrambe le lingue.
+- Pulizia flake8 completa (righe lunghe, spaziature), rimozione della cartella altri_plugin non più necessaria.
+- Verifica di caricamento su QGIS 4 (Qt6) con retrocompatibilità QGIS 3 (Qt5).
+- New shared SinoCloud "slate blue" dark theme (same as SARIAG and STAC Browser); replaces the previous Forest Theme.
+- Fully bilingual Italian/English interface with a 🇮🇹/🇬🇧 flag button next to the title; the choice is remembered across sessions.
+- Info tab drop-down populated from the author's shared plugin catalog (TAF Italia excluded), with bilingual description and GitHub repository opening.
+- "Original TAF Sources" and "Local Origins" tabs translated into both languages.
+- Full flake8 cleanup (long lines, spacing), removal of the no-longer-needed altri_plugin folder.
+- Load verification on QGIS 4 (Qt6) with QGIS 3 (Qt5) backwards compatibility.
+
 2.5.1
 - Fix definitivo TypeError LabelPlacement/Quadrant in QGIS 4.0.3+ (Norrköping).
 

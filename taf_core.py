@@ -85,12 +85,14 @@ PROVINCIA_GRANDE_ORIGINE = {
     "BA": "16 Taranto", "BT": "16 Taranto",
 }
 
+
 def get_fallback_origine(sigla_provincia):
     """Cerca la Grande Origine di fallback per una provincia."""
     nome_go = PROVINCIA_GRANDE_ORIGINE.get(sigla_provincia)
     if nome_go:
         return ORIGINI_CASSINI.get("grandi_origini", {}).get(nome_go)
     return None
+
 
 def get_configured_session() -> requests.Session:
     session = requests.Session()
@@ -115,8 +117,10 @@ def get_configured_session() -> requests.Session:
     )
     return session
 
+
 # Mappa in memoria per i Codici Belfiore
 BELFIORE_MAP = None
+
 
 def load_origini_cassini():
     json_path = os.path.join(os.path.dirname(__file__), "origini_cassini.json")
@@ -128,11 +132,14 @@ def load_origini_cassini():
             pass
     return {"grandi_origini": {}, "piccole_origini": {}}
 
+
 ORIGINI_CASSINI = load_origini_cassini()
+
 
 def reload_origini():
     global ORIGINI_CASSINI
     ORIGINI_CASSINI = load_origini_cassini()
+
 
 def get_cassini_transformer(lon_0, lat_0, x_0=0, y_0=0):
     # Trasformazione custom Cassini-Soldner su ellissoide Bessel -> WGS84
@@ -143,6 +150,7 @@ def get_cassini_transformer(lon_0, lat_0, x_0=0, y_0=0):
         "+units=m +no_defs"
     )
     return pyproj.Transformer.from_crs(proj4_str, "EPSG:4326", always_xy=True)
+
 
 def get_belfiore_map():
     global BELFIORE_MAP
@@ -158,8 +166,10 @@ def get_belfiore_map():
     return BELFIORE_MAP
 
 
-def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia, nome_provincia, raw_mode=False, try_convert=False):
-    """Converte un file .TAF a spaziatura fissa in CSV con coordinate (WGS84 o originali)."""
+def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia,
+                       nome_provincia, raw_mode=False, try_convert=False):
+    """Converte un file .TAF a spaziatura fissa in CSV con coordinate
+    (WGS84 o originali)."""
     fields = [
         ("Codice_Comune", 0, 4),
         ("Sezione", 4, 5),
@@ -265,7 +275,11 @@ def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia, nome_provi
                 url_comune = urllib.parse.quote(nome_comune)
                 url_co = urllib.parse.quote(codice_comune)
                 url_foglio = urllib.parse.quote(row[2])
-                link_mono = f"https://www1.agenziaentrate.gov.it/servizi/Monografie/risultato.php?provincia={url_provincia}&comune={url_comune}&co={url_co}&foglio={url_foglio}"
+                link_mono = (
+                    "https://www1.agenziaentrate.gov.it/servizi/Monografie/"
+                    f"risultato.php?provincia={url_provincia}"
+                    f"&comune={url_comune}&co={url_co}&foglio={url_foglio}"
+                )
 
                 row.insert(1, nome_comune)
                 row.extend([sr_origine, lon_wgs84, lat_wgs84, epsg_dest, link_mono])
@@ -359,7 +373,9 @@ def _download_office(sigla, suffisso, download_dir, raw_mode=False):
         return None
 
 
-def download_and_convert_province(sigla, nome_provincia, download_dir, progress_callback=None, raw_mode=False, try_convert=False):
+def download_and_convert_province(sigla, nome_provincia, download_dir,
+                                  progress_callback=None, raw_mode=False,
+                                  try_convert=False):
     """Scarica e converte i dati TAF per una provincia.
 
     Usa chiamate parallele (ThreadPoolExecutor) per verificare e scaricare
