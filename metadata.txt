@@ -3,11 +3,13 @@ name=TAF Italia
 qgisMinimumVersion=3.10
 qgisMaximumVersion=4.99
 description=Scarica e converte i Punti Fiduciali (TAF) dall'Agenzia delle Entrate in CSV/WGS84 per QGIS. / Downloads and converts Fiducial Points (TAF) from the Italian Revenue Agency into CSV/WGS84 for QGIS.
-version=2.6.3
+version=2.6.4
+supportsQt6=True
 author=Dott. Sarino Alfonso Grande
 email=sino.grande@gmail.com
 homepage=https://sinocloud.it
-changelog=2.6.3 - Corretto E501 (righe troppo lunghe, PEP8) in agenzia_taf_plugin.py e taf_core.py. / Fixed E501 (line too long, PEP8) in agenzia_taf_plugin.py and taf_core.py.
+changelog=2.6.4 - SICUREZZA: estrazione degli zip TAF con nome file sanificato (protezione zip-slip: un archivio anomalo non può più scrivere/leggere fuori dalla cartella di download); query Nominatim con parametri codificati correttamente; pulizia except ridondante ed E203; aggiunto il flag ufficiale supportsQt6 per le build QGIS Qt6. / SECURITY: TAF zip extraction now uses a sanitized file name (zip-slip protection: a malformed archive can no longer write/read outside the download folder); Nominatim query with properly encoded parameters; redundant except and E203 cleanup; added the official supportsQt6 flag for QGIS Qt6 builds.
+    2.6.3 - Corretto E501 (righe troppo lunghe, PEP8) in agenzia_taf_plugin.py e taf_core.py. / Fixed E501 (line too long, PEP8) in agenzia_taf_plugin.py and taf_core.py.
     2.6.2 - Corretto errore di parsing INI in metadata.txt (riga di changelog non indentata che rompeva configparser). / Fixed INI parsing error in metadata.txt (unindented changelog continuation line breaking configparser).
     2.6.1 - Corretto W503 (line break before binary operator) in plugin_hub.py; rimosso file nascosto .qgis_plugin_version generato erroneamente dentro il pacchetto dalla pipeline di pubblicazione. / Fixed W503 (line break before binary operator) in plugin_hub.py; removed hidden .qgis_plugin_version file that the publish pipeline was mistakenly bundling into the package.
     2.6.0 - Tema scuro slate-blue condiviso della famiglia SinoCloud, interfaccia bilingue IT/EN con pulsante bandiera, menù a tendina nella scheda Info con gli altri plugin dell'autore (link GitHub), pulizia flake8. / Shared SinoCloud slate-blue dark theme, bilingual IT/EN interface with flag button, Info tab drop-down with the author's other plugins (GitHub links), flake8 cleanup.

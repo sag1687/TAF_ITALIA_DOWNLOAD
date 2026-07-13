@@ -8,6 +8,7 @@ per evitare crash nel Python di QGIS dove potrebbero non essere installate.
 import os
 import csv
 import json
+import shutil
 import zipfile
 import traceback
 import urllib.parse
@@ -271,7 +272,7 @@ def convert_taf_to_csv(
             for line in f_in:
                 if len(line) < 150:
                     continue
-                row = [line[f[1] : f[2]].strip() for f in fields]
+                row = [line[f[1]:f[2]].strip() for f in fields]
 
                 est_str = row[8]
                 nord_str = row[7]
@@ -580,9 +581,17 @@ def download_and_convert_province(
                 if not taf_files:
                     continue
 
-                taf_filename = taf_files[0]
+                taf_member = taf_files[0]
+                # Estrazione con nome sanificato: il nome dentro lo zip
+                # potrebbe contenere sottocartelle o ".." e uscire dalla
+                # cartella di download (zip slip)
+                taf_filename = os.path.basename(
+                    taf_member.replace("\\", "/")
+                )
                 taf_filepath = os.path.join(download_dir, taf_filename)
-                zip_ref.extract(taf_filename, download_dir)
+                with zip_ref.open(taf_member) as src, \
+                        open(taf_filepath, "wb") as dst:
+                    shutil.copyfileobj(src, dst)
 
                 csv_ok = convert_taf_to_csv(
                     taf_filepath,
@@ -605,7 +614,7 @@ def download_and_convert_province(
                 if os.path.exists(taf_filepath):
                     os.remove(taf_filepath)
 
-        except (zipfile.BadZipFile, Exception):
+        except Exception:
             try:
                 os.remove(zip_filepath)
             except OSError:

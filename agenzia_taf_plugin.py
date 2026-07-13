@@ -311,12 +311,15 @@ class AgenziaTafPlugin:
             try:
                 # Forza il refresh della UI per mostrare il log
                 QgsApplication.processEvents()
-                url = (
-                    "https://nominatim.openstreetmap.org/search?"
-                    f"city={com_sel}&country=Italy&format=json"
-                )
                 resp = requests.get(
-                    url, headers={"User-Agent": "QGIS_TAF_Plugin"}, timeout=5
+                    "https://nominatim.openstreetmap.org/search",
+                    params={
+                        "city": com_sel,
+                        "country": "Italy",
+                        "format": "json",
+                    },
+                    headers={"User-Agent": "QGIS_TAF_Plugin"},
+                    timeout=5,
                 )
                 if resp.status_code == 200:
                     data = resp.json()
