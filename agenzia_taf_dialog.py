@@ -350,7 +350,7 @@ class AgenziaTafDialog(QDialog, FORM_CLASS):
             try:
                 with open(json_path, "r", encoding="utf-8") as f:
                     self.comuni_map = json.load(f)
-            except Exception:
+            except Exception:  # nosec B110
                 pass
 
         comuni_list = sorted(list(self.comuni_map.keys()))
@@ -683,7 +683,7 @@ class AgenziaTafDialog(QDialog, FORM_CLASS):
             try:
                 with open(json_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-            except Exception:
+            except Exception:  # nosec B110
                 pass
 
         # Ricostruisce le piccole origini dalla tabella

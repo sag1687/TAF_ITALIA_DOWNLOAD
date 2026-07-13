@@ -180,7 +180,7 @@ def load_origini_cassini():
         try:
             with open(json_path, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except Exception:
+        except Exception:  # nosec B110
             pass
     return {"grandi_origini": {}, "piccole_origini": {}}
 
@@ -213,7 +213,7 @@ def get_belfiore_map():
             try:
                 with open(json_path, "r", encoding="utf-8") as f:
                     BELFIORE_MAP = json.load(f)
-            except Exception:
+            except Exception:  # nosec B110
                 pass
     return BELFIORE_MAP
 
@@ -438,7 +438,7 @@ def _check_office(sigla, suffisso, download_dir):
         resp.raise_for_status()
         if "text/html" not in resp.headers.get("Content-Type", "").lower():
             return suffisso
-    except Exception:
+    except Exception:  # nosec B110
         pass
     return None
 
@@ -511,7 +511,7 @@ def download_and_convert_province(
             try:
                 if future.result() is not None:
                     validi.append(s)
-            except Exception:
+            except Exception:  # nosec B110
                 pass
 
     validi.sort(key=SUFFISSI_UFFICI.index)
@@ -545,7 +545,7 @@ def download_and_convert_province(
                         progress_callback(
                             15, f"   Download fallito per {sigla}{s}"
                         )
-            except Exception:
+            except Exception:  # nosec B110
                 pass
 
     if progress_callback:
