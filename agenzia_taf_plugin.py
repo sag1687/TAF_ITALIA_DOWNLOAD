@@ -31,6 +31,22 @@ except ImportError:
 from .agenzia_taf_dialog import AgenziaTafDialog
 
 
+def _enum_member(*candidates):
+    """Primo membro enum esistente tra (contenitore, gruppo, nome).
+
+    Risolve per nome, così lo stesso codice funziona con le API QGIS 4
+    (enum in Qgis) e con quelle QGIS 3 (enum annidati nelle classi).
+    """
+    for container, group, name in candidates:
+        obj = getattr(container, group, None) if group else container
+        if obj is None:
+            continue
+        value = getattr(obj, name, None)
+        if value is not None:
+            return value
+    return None
+
+
 class DownloadTafTask(QgsTask):
     """Task asincrono per il download e la conversione dei dati TAF.
 
@@ -141,39 +157,17 @@ class DownloadTafTask(QgsTask):
                         "concat('PF', \"PF_ID\", '/FG', \"Foglio\", '/COM', "
                         "\"Codice_Comune\")")
                     label_settings.isExpression = True
-                    try:
-                        # QGIS 4.0+
-                        label_settings.placement = (
-                            Qgis.LabelPlacement.OverPoint
-                        )
-                        label_settings.quadOffset = (
-                            Qgis.LabelQuadrantPosition.AboveRight
-                        )
-                    except AttributeError:
-                        try:
-                            label_settings.placement = (
-                                QgsPalLayerSettings.Placement.OverPoint
-                            )
-                            label_settings.quadOffset = (
-                                QgsPalLayerSettings.Quadrant.QuadrantAboveRight
-                            )
-                        except AttributeError:
-                            try:
-                                label_settings.placement = (
-                                    QgsPalLayerSettings
-                                    .LabelPlacement.OverPoint
-                                )
-                                label_settings.quadOffset = (
-                                    QgsPalLayerSettings
-                                    .QuadrantPosition.QuadrantAboveRight
-                                )
-                            except AttributeError:
-                                label_settings.placement = (
-                                    QgsPalLayerSettings.OverPoint
-                                )
-                                label_settings.quadOffset = (
-                                    QgsPalLayerSettings.QuadrantAboveRight
-                                )
+                    label_settings.placement = _enum_member(
+                        (Qgis, "LabelPlacement", "OverPoint"),
+                        (QgsPalLayerSettings, "Placement", "OverPoint"),
+                        (QgsPalLayerSettings, None, "OverPoint"),
+                    )
+                    label_settings.quadOffset = _enum_member(
+                        (Qgis, "LabelQuadrantPosition", "AboveRight"),
+                        (QgsPalLayerSettings, "Quadrant",
+                         "QuadrantAboveRight"),
+                        (QgsPalLayerSettings, None, "QuadrantAboveRight"),
+                    )
                     label_settings.xOffset = 1
                     label_settings.yOffset = 1
                     text_format = QgsTextFormat()

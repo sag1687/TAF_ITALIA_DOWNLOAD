@@ -356,12 +356,8 @@ class AgenziaTafDialog(QDialog, FORM_CLASS):
         comuni_list = sorted(list(self.comuni_map.keys()))
         self.combo_comuni.addItems(comuni_list)
 
-        try:
-            case_insensitive = Qt.CaseInsensitive
-            match_contains = Qt.MatchContains
-        except AttributeError:
-            case_insensitive = Qt.CaseSensitivity.CaseInsensitive
-            match_contains = Qt.MatchFlag.MatchContains
+        case_insensitive = Qt.CaseSensitivity.CaseInsensitive
+        match_contains = Qt.MatchFlag.MatchContains
 
         completer = QCompleter(comuni_list, self)
         completer.setCaseSensitivity(case_insensitive)
@@ -373,15 +369,8 @@ class AgenziaTafDialog(QDialog, FORM_CLASS):
     # ------------------------------------------------------------------
 
     def setup_info_tab(self):
-        try:
-            smooth_t = Qt.SmoothTransformation
-        except AttributeError:
-            smooth_t = Qt.TransformationMode.SmoothTransformation
-
-        try:
-            pointing_cursor = Qt.PointingHandCursor
-        except AttributeError:
-            pointing_cursor = Qt.CursorShape.PointingHandCursor
+        smooth_t = Qt.TransformationMode.SmoothTransformation
+        pointing_cursor = Qt.CursorShape.PointingHandCursor
 
         # Logo TAF (grande, prominente)
         t_path = os.path.join(os.path.dirname(__file__), "TAF.png")
@@ -423,11 +412,7 @@ class AgenziaTafDialog(QDialog, FORM_CLASS):
             self.combo_altri_plugin.setItemData(
                 self.combo_altri_plugin.count() - 1,
                 desc,
-                (
-                    Qt.ItemDataRole.ToolTipRole
-                    if hasattr(Qt, "ItemDataRole")
-                    else Qt.ToolTipRole
-                ),
+                Qt.ItemDataRole.ToolTipRole,
             )
         if current is not None:
             idx = self.combo_altri_plugin.findData(current)
@@ -548,13 +533,8 @@ class AgenziaTafDialog(QDialog, FORM_CLASS):
         # Tabella
         self.table_origini = QTableWidget(0, 6)
 
-        try:
-            stretch_mode = QHeaderView.Stretch
-        except AttributeError:
-            stretch_mode = QHeaderView.ResizeMode.Stretch
-
         self.table_origini.horizontalHeader().setSectionResizeMode(
-            stretch_mode
+            QHeaderView.ResizeMode.Stretch
         )
         layout.addWidget(self.table_origini)
 
