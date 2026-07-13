@@ -24,65 +24,116 @@ import pyproj
 BASE_URL = "https://www1.agenziaentrate.gov.it/servizi/TafDis/download.php"
 SUFFISSI_UFFICI = ["", "1", "2", "3", "4", "5"]
 
-# Mappatura province → Grande Origine (fallback quando manca la Piccola Origine)
+# Mappatura province → Grande Origine (fallback quando manca la Piccola
+# Origine)
 PROVINCIA_GRANDE_ORIGINE = {
-    "VC": "1 Vercelli (Punto ideale)", "BI": "1 Vercelli (Punto ideale)",
-    "NO": "1 Vercelli (Punto ideale)", "VB": "1 Vercelli (Punto ideale)",
-    "AO": "1 Vercelli (Punto ideale)", "TO": "1 Vercelli (Punto ideale)",
+    "VC": "1 Vercelli (Punto ideale)",
+    "BI": "1 Vercelli (Punto ideale)",
+    "NO": "1 Vercelli (Punto ideale)",
+    "VB": "1 Vercelli (Punto ideale)",
+    "AO": "1 Vercelli (Punto ideale)",
+    "TO": "1 Vercelli (Punto ideale)",
     "CN": "1 Vercelli (Punto ideale)",
-    "PN": "2 Pordenone", "UD": "2 Pordenone", "BL": "2 Pordenone",
-    "VE": "2 Pordenone", "PD": "2 Pordenone", "TV": "2 Pordenone",
-    "VR": "2 Pordenone", "VI": "2 Pordenone",
-    "BG": "3 Monte Bronzone", "BS": "3 Monte Bronzone",
-    "SO": "3 Monte Bronzone", "CR": "3 Monte Bronzone",
+    "PN": "2 Pordenone",
+    "UD": "2 Pordenone",
+    "BL": "2 Pordenone",
+    "VE": "2 Pordenone",
+    "PD": "2 Pordenone",
+    "TV": "2 Pordenone",
+    "VR": "2 Pordenone",
+    "VI": "2 Pordenone",
+    "BG": "3 Monte Bronzone",
+    "BS": "3 Monte Bronzone",
+    "SO": "3 Monte Bronzone",
+    "CR": "3 Monte Bronzone",
     "MN": "3 Monte Bronzone",
-    "LO": "4 Lodi", "MI": "4 Lodi", "CO": "4 Lodi",
-    "PC": "4 Lodi", "PR": "4 Lodi", "LC": "4 Lodi",
-    "MB": "4 Lodi", "VA": "4 Lodi", "PV": "4 Lodi",
-    "AL": "5 Alessandria", "AT": "5 Alessandria",
+    "LO": "4 Lodi",
+    "MI": "4 Lodi",
+    "CO": "4 Lodi",
+    "PC": "4 Lodi",
+    "PR": "4 Lodi",
+    "LC": "4 Lodi",
+    "MB": "4 Lodi",
+    "VA": "4 Lodi",
+    "PV": "4 Lodi",
+    "AL": "5 Alessandria",
+    "AT": "5 Alessandria",
     "IM": "6 Monte Bignone",
-    "GE": "7 Forte Diamante", "SV": "7 Forte Diamante",
+    "GE": "7 Forte Diamante",
+    "SV": "7 Forte Diamante",
     "SP": "7 Forte Diamante",
-    "BO": "8 Portonovo", "FE": "8 Portonovo", "RA": "8 Portonovo",
-    "FC": "8 Portonovo", "RN": "8 Portonovo", "RO": "8 Portonovo",
-    "MO": "8 Portonovo", "RE": "8 Portonovo",
-    "SI": "9 Siena (T. del Mangia)", "FI": "9 Siena (T. del Mangia)",
-    "AR": "9 Siena (T. del Mangia)", "GR": "9 Siena (T. del Mangia)",
-    "PI": "9 Siena (T. del Mangia)", "LI": "9 Siena (T. del Mangia)",
-    "PT": "9 Siena (T. del Mangia)", "LU": "9 Siena (T. del Mangia)",
-    "MS": "9 Siena (T. del Mangia)", "PO": "9 Siena (T. del Mangia)",
+    "BO": "8 Portonovo",
+    "FE": "8 Portonovo",
+    "RA": "8 Portonovo",
+    "FC": "8 Portonovo",
+    "RN": "8 Portonovo",
+    "RO": "8 Portonovo",
+    "MO": "8 Portonovo",
+    "RE": "8 Portonovo",
+    "SI": "9 Siena (T. del Mangia)",
+    "FI": "9 Siena (T. del Mangia)",
+    "AR": "9 Siena (T. del Mangia)",
+    "GR": "9 Siena (T. del Mangia)",
+    "PI": "9 Siena (T. del Mangia)",
+    "LI": "9 Siena (T. del Mangia)",
+    "PT": "9 Siena (T. del Mangia)",
+    "LU": "9 Siena (T. del Mangia)",
+    "MS": "9 Siena (T. del Mangia)",
+    "PO": "9 Siena (T. del Mangia)",
     "PU": "10 Urbino",
-    "PG": "11 Monte Pennino", "MC": "11 Monte Pennino",
-    "AN": "11 Monte Pennino", "AP": "11 Monte Pennino",
+    "PG": "11 Monte Pennino",
+    "MC": "11 Monte Pennino",
+    "AN": "11 Monte Pennino",
+    "AP": "11 Monte Pennino",
     "FM": "11 Monte Pennino",
-    "RM": "12 Roma (Monte Mario)", "VT": "12 Roma (Monte Mario)",
-    "TR": "12 Roma (Monte Mario)", "RI": "12 Roma (Monte Mario)",
-    "LT": "12 Roma (Monte Mario)", "FR": "12 Roma (Monte Mario)",
-    "AQ": "13 Monte Ocre", "TE": "13 Monte Ocre",
-    "CH": "13 Monte Ocre", "PE": "13 Monte Ocre",
-    "CB": "14 Valle Palombo", "IS": "14 Valle Palombo",
-    "AV": "15 Monte Terminio", "BN": "15 Monte Terminio",
+    "RM": "12 Roma (Monte Mario)",
+    "VT": "12 Roma (Monte Mario)",
+    "TR": "12 Roma (Monte Mario)",
+    "RI": "12 Roma (Monte Mario)",
+    "LT": "12 Roma (Monte Mario)",
+    "FR": "12 Roma (Monte Mario)",
+    "AQ": "13 Monte Ocre",
+    "TE": "13 Monte Ocre",
+    "CH": "13 Monte Ocre",
+    "PE": "13 Monte Ocre",
+    "CB": "14 Valle Palombo",
+    "IS": "14 Valle Palombo",
+    "AV": "15 Monte Terminio",
+    "BN": "15 Monte Terminio",
     "SA": "15 Monte Terminio",
     "TA": "16 Taranto",
-    "LE": "17 Lecce", "BR": "17 Lecce",
-    "CS": "18 Monte Brutto", "CZ": "18 Monte Brutto",
-    "RC": "18 Monte Brutto", "VV": "18 Monte Brutto",
+    "LE": "17 Lecce",
+    "BR": "17 Lecce",
+    "CS": "18 Monte Brutto",
+    "CZ": "18 Monte Brutto",
+    "RC": "18 Monte Brutto",
+    "VV": "18 Monte Brutto",
     "KR": "18 Monte Brutto",
-    "AG": "19 Torre Titone", "CL": "19 Torre Titone",
-    "CT": "20 Monte Etna (P. Lucia)", "ME": "20 Monte Etna (P. Lucia)",
+    "AG": "19 Torre Titone",
+    "CL": "19 Torre Titone",
+    "CT": "20 Monte Etna (P. Lucia)",
+    "ME": "20 Monte Etna (P. Lucia)",
     "EN": "20 Monte Etna (P. Lucia)",
-    "SR": "22 Mineo", "RG": "22 Mineo",
-    "PA": "19 Torre Titone", "TP": "19 Torre Titone",
-    "CA": "23 Sardegna (Punto ideale)", "SS": "23 Sardegna (Punto ideale)",
-    "NU": "23 Sardegna (Punto ideale)", "OR": "23 Sardegna (Punto ideale)",
+    "SR": "22 Mineo",
+    "RG": "22 Mineo",
+    "PA": "19 Torre Titone",
+    "TP": "19 Torre Titone",
+    "CA": "23 Sardegna (Punto ideale)",
+    "SS": "23 Sardegna (Punto ideale)",
+    "NU": "23 Sardegna (Punto ideale)",
+    "OR": "23 Sardegna (Punto ideale)",
     "SU": "23 Sardegna (Punto ideale)",
-    "BZ": "24 Innsbruck", "TN": "24 Innsbruck",
-    "TS": "25 Krimberg", "GO": "25 Krimberg",
+    "BZ": "24 Innsbruck",
+    "TN": "24 Innsbruck",
+    "TS": "25 Krimberg",
+    "GO": "25 Krimberg",
     "CE": "26 Monte Cairo",
     "NA": "28 Cancello",
-    "PZ": "14 Valle Palombo", "MT": "14 Valle Palombo",
+    "PZ": "14 Valle Palombo",
+    "MT": "14 Valle Palombo",
     "FG": "16 Taranto",
-    "BA": "16 Taranto", "BT": "16 Taranto",
+    "BA": "16 Taranto",
+    "BT": "16 Taranto",
 }
 
 
@@ -166,8 +217,14 @@ def get_belfiore_map():
     return BELFIORE_MAP
 
 
-def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia,
-                       nome_provincia, raw_mode=False, try_convert=False):
+def convert_taf_to_csv(
+    taf_file_path,
+    csv_file_path,
+    sigla_provincia,
+    nome_provincia,
+    raw_mode=False,
+    try_convert=False,
+):
     """Converte un file .TAF a spaziatura fissa in CSV con coordinate
     (WGS84 o originali)."""
     fields = [
@@ -202,14 +259,19 @@ def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia,
             writer = csv.writer(f_out, delimiter=",")
             header = ["Codice_Comune", "Nome_Comune"]
             header.extend(f[0] for f in fields[1:])
-            header += ["Sistema_Riferimento_Origine", "Lon_WGS84",
-                       "Lat_WGS84", "EPSG_Destinazione", "Link_Monografia"]
+            header += [
+                "Sistema_Riferimento_Origine",
+                "Lon_WGS84",
+                "Lat_WGS84",
+                "EPSG_Destinazione",
+                "Link_Monografia",
+            ]
             writer.writerow(header)
 
             for line in f_in:
                 if len(line) < 150:
                     continue
-                row = [line[f[1]:f[2]].strip() for f in fields]
+                row = [line[f[1] : f[2]].strip() for f in fields]
 
                 est_str = row[8]
                 nord_str = row[7]
@@ -230,40 +292,66 @@ def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia,
                             sr_origine = "Gauss-Boaga Ovest (3003)"
                             if not raw_mode:
                                 epsg_dest = "EPSG:4326"
-                                lon_wgs84, lat_wgs84 = transformer_gb_ovest.transform(
-                                    est_val, nord_val
+                                lon_wgs84, lat_wgs84 = (
+                                    transformer_gb_ovest.transform(
+                                        est_val, nord_val
+                                    )
                                 )
                         elif 2300000 < est_val < 2900000:
                             sr_origine = "Gauss-Boaga Est (3004)"
                             if not raw_mode:
                                 epsg_dest = "EPSG:4326"
-                                lon_wgs84, lat_wgs84 = transformer_gb_est.transform(
-                                    est_val, nord_val
+                                lon_wgs84, lat_wgs84 = (
+                                    transformer_gb_est.transform(
+                                        est_val, nord_val
+                                    )
                                 )
                         elif abs(est_val) < 500000:
                             origine = None
-                            if codice_comune in ORIGINI_CASSINI.get("piccole_origini", {}):
-                                origine = ORIGINI_CASSINI["piccole_origini"][codice_comune]
-                                sr_origine = f"Cassini-Soldner (Locale: {codice_comune})"
+                            if codice_comune in ORIGINI_CASSINI.get(
+                                "piccole_origini", {}
+                            ):
+                                origine = ORIGINI_CASSINI["piccole_origini"][
+                                    codice_comune
+                                ]
+                                sr_origine = (
+                                    f"Cassini-Soldner (Locale: "
+                                    f"{codice_comune})")
                             elif try_convert:
                                 origine = get_fallback_origine(sigla_provincia)
                                 if origine:
-                                    sr_origine = f"Cassini-Soldner (Approssimata: {sigla_provincia})"
+                                    sr_origine = (
+                                        f"Cassini-Soldner (Approssimata: "
+                                        f"{sigla_provincia})")
                                 else:
-                                    sr_origine = "Cassini-Soldner (Origine sconosciuta)"
+                                    sr_origine = (
+                                        "Cassini-Soldner (Origine sconosciuta)"
+                                    )
                             else:
-                                sr_origine = "Cassini-Soldner (Origine sconosciuta)"
+                                sr_origine = (
+                                    "Cassini-Soldner (Origine sconosciuta)"
+                                )
 
                             if not raw_mode:
                                 if not origine:
-                                    epsg_dest = "Manca configurazione in origini_cassini.json"
+                                    epsg_dest = (
+                                        "Manca configurazione in "
+                                        "origini_cassini.json")
                                 else:
                                     epsg_dest = "EPSG:4326"
-                                    transformer_cassini = get_cassini_transformer(
-                                        origine["lon"], origine["lat"],
-                                        origine.get("falso_est", 0), origine.get("falso_nord", 0)
+                                    transformer_cassini = (
+                                        get_cassini_transformer(
+                                            origine["lon"],
+                                            origine["lat"],
+                                            origine.get("falso_est", 0),
+                                            origine.get("falso_nord", 0),
+                                        )
                                     )
-                                    lon_wgs84, lat_wgs84 = transformer_cassini.transform(est_val, nord_val)
+                                    lon_wgs84, lat_wgs84 = (
+                                        transformer_cassini.transform(
+                                            est_val, nord_val
+                                        )
+                                    )
 
                         if lon_wgs84 and lat_wgs84:
                             lon_wgs84 = f"{lon_wgs84:.6f}"
@@ -282,7 +370,9 @@ def convert_taf_to_csv(taf_file_path, csv_file_path, sigla_provincia,
                 )
 
                 row.insert(1, nome_comune)
-                row.extend([sr_origine, lon_wgs84, lat_wgs84, epsg_dest, link_mono])
+                row.extend(
+                    [sr_origine, lon_wgs84, lat_wgs84, epsg_dest, link_mono]
+                )
                 writer.writerow(row)
         return True
     except Exception:
@@ -326,12 +416,16 @@ def create_geopackage(csv_filepath, gpkg_filepath, raw_mode=False):
         return error_code == QgsVectorFileWriter.NoError
     except Exception:
         import traceback
+
         traceback.print_exc()
         return False
 
 
 def _check_office(sigla, suffisso, download_dir):
-    """Verifica se un ufficio ha dati. Restituisce il suffisso se valido, None altrimenti."""
+    """Verifica se un ufficio ha dati.
+
+    Restituisce il suffisso se valido, None altrimenti.
+    """
     iduff = f"{sigla}{suffisso}"
     zip_filepath = os.path.join(download_dir, f"TAF_{iduff}.zip")
     if os.path.exists(zip_filepath) and os.path.getsize(zip_filepath) > 0:
@@ -349,7 +443,10 @@ def _check_office(sigla, suffisso, download_dir):
 
 
 def _download_office(sigla, suffisso, download_dir, raw_mode=False):
-    """Scarica lo zip di un ufficio valido. Restituisce il suffisso se OK, None altrimenti."""
+    """Scarica lo zip di un ufficio valido.
+
+    Restituisce il suffisso se OK, None altrimenti.
+    """
     iduff = f"{sigla}{suffisso}"
     zip_filepath = os.path.join(download_dir, f"TAF_{iduff}.zip")
     if os.path.exists(zip_filepath) and os.path.getsize(zip_filepath) > 0:
@@ -373,9 +470,14 @@ def _download_office(sigla, suffisso, download_dir, raw_mode=False):
         return None
 
 
-def download_and_convert_province(sigla, nome_provincia, download_dir,
-                                  progress_callback=None, raw_mode=False,
-                                  try_convert=False):
+def download_and_convert_province(
+    sigla,
+    nome_provincia,
+    download_dir,
+    progress_callback=None,
+    raw_mode=False,
+    try_convert=False,
+):
     """Scarica e converte i dati TAF per una provincia.
 
     Usa chiamate parallele (ThreadPoolExecutor) per verificare e scaricare
@@ -399,7 +501,10 @@ def download_and_convert_province(sigla, nome_provincia, download_dir,
 
     validi = []
     with ThreadPoolExecutor(max_workers=6) as executor:
-        fut_map = {executor.submit(_check_office, sigla, s, download_dir): s for s in SUFFISSI_UFFICI}
+        fut_map = {
+            executor.submit(_check_office, sigla, s, download_dir): s
+            for s in SUFFISSI_UFFICI
+        }
         for future in as_completed(fut_map):
             s = fut_map[future]
             try:
@@ -411,7 +516,9 @@ def download_and_convert_province(sigla, nome_provincia, download_dir,
     validi.sort(key=SUFFISSI_UFFICI.index)
     if not validi:
         if progress_callback:
-            progress_callback(100, "Nessun ufficio valido trovato per questa provincia.")
+            progress_callback(
+                100, "Nessun ufficio valido trovato per questa provincia."
+            )
         return generated_files
 
     if progress_callback:
@@ -423,18 +530,27 @@ def download_and_convert_province(sigla, nome_provincia, download_dir,
         progress_callback(15, "Download in parallelo...")
 
     with ThreadPoolExecutor(max_workers=6) as executor:
-        fut_map = {executor.submit(_download_office, sigla, s, download_dir, raw_mode): s for s in validi}
+        fut_map = {
+            executor.submit(
+                _download_office, sigla, s, download_dir, raw_mode
+            ): s
+            for s in validi
+        }
         for future in as_completed(fut_map):
             s = fut_map[future]
             try:
                 if future.result() is None:
                     if progress_callback:
-                        progress_callback(15, f"   Download fallito per {sigla}{s}")
+                        progress_callback(
+                            15, f"   Download fallito per {sigla}{s}"
+                        )
             except Exception:
                 pass
 
     if progress_callback:
-        progress_callback(50, "Download completato. Estrazione e conversione...")
+        progress_callback(
+            50, "Download completato. Estrazione e conversione..."
+        )
 
     # Fase 3: estrazione e conversione sequenziale
     for i, suffisso in enumerate(validi):
@@ -447,7 +563,9 @@ def download_and_convert_province(sigla, nome_provincia, download_dir,
             download_dir, f"Tabella_Punti_Fiduciali_Prov_{iduff}.gpkg"
         )
 
-        if not (os.path.exists(zip_filepath) and os.path.getsize(zip_filepath) > 0):
+        if not (
+            os.path.exists(zip_filepath) and os.path.getsize(zip_filepath) > 0
+        ):
             continue
 
         try:
@@ -466,10 +584,19 @@ def download_and_convert_province(sigla, nome_provincia, download_dir,
                 taf_filepath = os.path.join(download_dir, taf_filename)
                 zip_ref.extract(taf_filename, download_dir)
 
-                csv_ok = convert_taf_to_csv(taf_filepath, csv_filepath, sigla, nome_provincia, raw_mode, try_convert)
+                csv_ok = convert_taf_to_csv(
+                    taf_filepath,
+                    csv_filepath,
+                    sigla,
+                    nome_provincia,
+                    raw_mode,
+                    try_convert,
+                )
 
                 if csv_ok:
-                    gpkg_ok = create_geopackage(csv_filepath, gpkg_filepath, raw_mode)
+                    gpkg_ok = create_geopackage(
+                        csv_filepath, gpkg_filepath, raw_mode
+                    )
                     if gpkg_ok:
                         generated_files.append(gpkg_filepath)
                     else:

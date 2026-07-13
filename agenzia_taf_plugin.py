@@ -38,7 +38,15 @@ class DownloadTafTask(QgsTask):
     i messaggi di log in una lista, scritti nella UI dal main thread.
     """
 
-    def __init__(self, sigla, nome_prov, download_dir, description, raw_mode=False, try_convert=False):
+    def __init__(
+        self,
+        sigla,
+        nome_prov,
+        download_dir,
+        description,
+        raw_mode=False,
+        try_convert=False,
+    ):
         super().__init__(description, QgsTask.CanCancel)
         self.sigla = sigla
         self.nome_prov = nome_prov
@@ -57,13 +65,19 @@ class DownloadTafTask(QgsTask):
             from .taf_core import download_and_convert_province
 
             def local_progress(val, text):
-                """Callback invocata da taf_core per comunicare il progresso."""
+                """Callback invocata da taf_core per comunicare il
+                progresso."""
                 self.setProgress(float(val))
                 if text:
                     self.log_messages.append(text)
 
             self.generated_files = download_and_convert_province(
-                self.sigla, self.nome_prov, self.download_dir, local_progress, self.raw_mode, self.try_convert
+                self.sigla,
+                self.nome_prov,
+                self.download_dir,
+                local_progress,
+                self.raw_mode,
+                self.try_convert,
             )
             return True
         except Exception as e:
@@ -93,10 +107,11 @@ class DownloadTafTask(QgsTask):
                     layer = QgsVectorLayer(filepath, layer_name, "ogr")
                 elif filepath.endswith(".csv"):
                     # Carica CSV come layer di testo delimitato con coordinate
-                    if getattr(self, 'raw_mode', False):
+                    if getattr(self, "raw_mode", False):
                         uri = (
                             f"file:///{filepath}?delimiter=,&"
-                            f"xField=Coord_Est_X&yField=Coord_Nord_Y&crs=EPSG:3003"
+                            f"xField=Coord_Est_X&yField=Coord_Nord_Y&"
+                            f"crs=EPSG:3003"
                         )
                     else:
                         uri = (
@@ -111,30 +126,54 @@ class DownloadTafTask(QgsTask):
                     QgsProject.instance().addMapLayer(layer)
 
                     # 1. Stile (Marker Triangolare Verde)
-                    symbol = QgsMarkerSymbol.createSimple({
-                        'name': 'triangle', 'color': '#88b04b',
-                        'outline_color': 'black', 'size': '3',
-                    })
+                    symbol = QgsMarkerSymbol.createSimple(
+                        {
+                            "name": "triangle",
+                            "color": "#88b04b",
+                            "outline_color": "black",
+                            "size": "3",
+                        }
+                    )
                     layer.setRenderer(QgsSingleSymbolRenderer(symbol))
                     # 2. Labeling (PFXX/FGYY/COMZZZ)
                     label_settings = QgsPalLayerSettings()
-                    label_settings.fieldName = "concat('PF', \"PF_ID\", '/FG', \"Foglio\", '/COM', \"Codice_Comune\")"
+                    label_settings.fieldName = (
+                        "concat('PF', \"PF_ID\", '/FG', \"Foglio\", '/COM', "
+                        "\"Codice_Comune\")")
                     label_settings.isExpression = True
                     try:
                         # QGIS 4.0+
-                        label_settings.placement = Qgis.LabelPlacement.OverPoint
-                        label_settings.quadOffset = Qgis.LabelQuadrantPosition.AboveRight
+                        label_settings.placement = (
+                            Qgis.LabelPlacement.OverPoint
+                        )
+                        label_settings.quadOffset = (
+                            Qgis.LabelQuadrantPosition.AboveRight
+                        )
                     except AttributeError:
                         try:
-                            label_settings.placement = QgsPalLayerSettings.Placement.OverPoint
-                            label_settings.quadOffset = QgsPalLayerSettings.Quadrant.QuadrantAboveRight
+                            label_settings.placement = (
+                                QgsPalLayerSettings.Placement.OverPoint
+                            )
+                            label_settings.quadOffset = (
+                                QgsPalLayerSettings.Quadrant.QuadrantAboveRight
+                            )
                         except AttributeError:
                             try:
-                                label_settings.placement = QgsPalLayerSettings.LabelPlacement.OverPoint
-                                label_settings.quadOffset = QgsPalLayerSettings.QuadrantPosition.QuadrantAboveRight
+                                label_settings.placement = (
+                                    QgsPalLayerSettings
+                                    .LabelPlacement.OverPoint
+                                )
+                                label_settings.quadOffset = (
+                                    QgsPalLayerSettings
+                                    .QuadrantPosition.QuadrantAboveRight
+                                )
                             except AttributeError:
-                                label_settings.placement = QgsPalLayerSettings.OverPoint
-                                label_settings.quadOffset = QgsPalLayerSettings.QuadrantAboveRight
+                                label_settings.placement = (
+                                    QgsPalLayerSettings.OverPoint
+                                )
+                                label_settings.quadOffset = (
+                                    QgsPalLayerSettings.QuadrantAboveRight
+                                )
                     label_settings.xOffset = 1
                     label_settings.yOffset = 1
                     text_format = QgsTextFormat()
@@ -146,11 +185,14 @@ class DownloadTafTask(QgsTask):
                     layer.setLabeling(labeling)
                     # 3. Action Monografia
                     action = QgsAction(
-                        QgsAction.OpenUrl, "Apri Monografia PF",
-                        "[%Link_Monografia%]", "", False,
+                        QgsAction.OpenUrl,
+                        "Apri Monografia PF",
+                        "[%Link_Monografia%]",
+                        "",
+                        False,
                         "Apri Monografia ufficiale dell'Agenzia delle Entrate",
                     )
-                    action.setActionScopes({'Feature', 'Canvas'})
+                    action.setActionScopes({"Feature", "Canvas"})
                     layer.actions().addAction(action)
                     layer.triggerRepaint()
 
@@ -216,7 +258,9 @@ class AgenziaTafPlugin:
     def initGui(self):
         icon_path = os.path.join(self.plugin_dir, "icon.png")
         self.add_action(
-            icon_path, text="TAF Italia - Scarica Punti Fiduciali", callback=self.run
+            icon_path,
+            text="TAF Italia - Scarica Punti Fiduciali",
+            callback=self.run,
         )
 
     def unload(self):
@@ -235,13 +279,17 @@ class AgenziaTafPlugin:
     def start_download(self):
         com_sel = self.dlg.combo_comuni.currentText()
         if not com_sel or com_sel not in self.dlg.comuni_map:
-            QMessageBox.warning(self.dlg, "Attenzione", "Seleziona un comune valido.")
+            QMessageBox.warning(
+                self.dlg, "Attenzione", "Seleziona un comune valido."
+            )
             return
 
         sigla = self.dlg.comuni_map[com_sel]
         project_path = QgsProject.instance().fileName()
         base_dir = (
-            os.path.dirname(project_path) if project_path else os.path.expanduser("~")
+            os.path.dirname(project_path)
+            if project_path
+            else os.path.expanduser("~")
         )
         download_dir = os.path.join(base_dir, "dataset_taf")
 
@@ -257,11 +305,16 @@ class AgenziaTafPlugin:
             # -----------------------------------------------------------------
             import requests
 
-            self.dlg.append_log(f"Ricerca coordinate per {com_sel} su OSM Nominatim...")
+            self.dlg.append_log(
+                f"Ricerca coordinate per {com_sel} su OSM Nominatim..."
+            )
             try:
                 # Forza il refresh della UI per mostrare il log
                 QgsApplication.processEvents()
-                url = f"https://nominatim.openstreetmap.org/search?city={com_sel}&country=Italy&format=json"
+                url = (
+                    "https://nominatim.openstreetmap.org/search?"
+                    f"city={com_sel}&country=Italy&format=json"
+                )
                 resp = requests.get(
                     url, headers={"User-Agent": "QGIS_TAF_Plugin"}, timeout=5
                 )
@@ -273,7 +326,9 @@ class AgenziaTafPlugin:
                         if bbox:
                             minLat, maxLat, minLon, maxLon = map(float, bbox)
                             crs_src = QgsCoordinateReferenceSystem("EPSG:4326")
-                            crs_dest = QgsCoordinateReferenceSystem("EPSG:3857")
+                            crs_dest = QgsCoordinateReferenceSystem(
+                                "EPSG:3857"
+                            )
                             transform = QgsCoordinateTransform(
                                 crs_src, crs_dest, QgsProject.instance()
                             )
@@ -283,22 +338,35 @@ class AgenziaTafPlugin:
                                 rect = transform.transformBoundingBox(rect)
                                 self.dlg.map_canvas.setExtent(rect)
                                 self.dlg.map_canvas.refresh()
-                                self.dlg.append_log(f"Mappa centrata su {com_sel}.")
+                                self.dlg.append_log(
+                                    f"Mappa centrata su {com_sel}."
+                                )
                             except Exception as e:
                                 self.dlg.append_log(
                                     f"Errore trasformazione coordinate: {e}"
                                 )
                     else:
-                        self.dlg.append_log(f"Comune '{com_sel}' non trovato su OSM.")
+                        self.dlg.append_log(
+                            f"Comune '{com_sel}' non trovato su OSM."
+                        )
             except Exception as e:
-                self.dlg.append_log(f"Impossibile connettersi a OSM Nominatim: {e}")
+                self.dlg.append_log(
+                    f"Impossibile connettersi a OSM Nominatim: {e}"
+                )
 
             self.dlg.append_log("Avvio download dati TAF...")
             # -----------------------------------------------------------------
 
             raw_mode = self.dlg.chk_raw_mode.isChecked()
             try_convert = self.dlg.chk_try_convert.isChecked()
-            task = DownloadTafTask(sigla, com_sel, download_dir, f"TAF Italia: {sigla}", raw_mode, try_convert)
+            task = DownloadTafTask(
+                sigla,
+                com_sel,
+                download_dir,
+                f"TAF Italia: {sigla}",
+                raw_mode,
+                try_convert,
+            )
 
             # Collegamento del progresso nativo di QgsTask alla progress bar
             task.progressChanged.connect(self._on_progress_changed)
@@ -309,10 +377,13 @@ class AgenziaTafPlugin:
                 self.dlg.progress_bar.setValue(100)
                 n = len(task.generated_files)
                 if n > 0:
-                    self.dlg.append_log(f"✅ Completato! {n} file caricati in QGIS.")
+                    self.dlg.append_log(
+                        f"✅ Completato! {n} file caricati in QGIS."
+                    )
                 else:
                     self.dlg.append_log(
-                        "⚠️ Completato ma nessun dato trovato per questa provincia. "
+                        "⚠️ Completato ma nessun dato trovato per questa "
+                        "provincia. "
                         "Il server potrebbe non avere dati TAF disponibili."
                     )
                 self.dlg.btn_scarica.setEnabled(True)
@@ -323,11 +394,14 @@ class AgenziaTafPlugin:
                 """Chiamato quando il task fallisce o viene cancellato."""
                 self._flush_task_logs(task)
                 err_msg = (
-                    str(task.exception) if task.exception else "Errore sconosciuto"
+                    str(task.exception)
+                    if task.exception
+                    else "Errore sconosciuto"
                 )
                 self.dlg.append_log(f"❌ Elaborazione fallita: {err_msg}")
                 self.dlg.append_log(
-                    "Controlla il Log Messaggi di QGIS (Vista > Pannelli > Log Messaggi) "
+                    "Controlla il Log Messaggi di QGIS (Vista > Pannelli > "
+                    "Log Messaggi) "
                     "per dettagli."
                 )
                 self.dlg.btn_scarica.setEnabled(True)
@@ -350,7 +424,8 @@ class AgenziaTafPlugin:
             )
 
     def _on_progress_changed(self, progress):
-        """Aggiorna la progress bar della dialog dal segnale nativo di QgsTask."""
+        """Aggiorna la progress bar della dialog dal segnale nativo di
+        QgsTask."""
         if self.dlg:
             self.dlg.progress_bar.setValue(int(progress))
             # Flush dei messaggi di log accumulati dal worker thread
