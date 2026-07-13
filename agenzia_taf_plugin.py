@@ -63,7 +63,7 @@ class DownloadTafTask(QgsTask):
         raw_mode=False,
         try_convert=False,
     ):
-        super().__init__(description, QgsTask.CanCancel)
+        super().__init__(description, QgsTask.Flag.CanCancel)
         self.sigla = sigla
         self.nome_prov = nome_prov
         self.download_dir = download_dir
@@ -102,7 +102,7 @@ class DownloadTafTask(QgsTask):
             QgsMessageLog.logMessage(
                 f"TAF Task crash:\n{traceback.format_exc()}",
                 "TAF Italia",
-                level=Qgis.Critical,
+                level=Qgis.MessageLevel.Critical,
             )
             return False
 
@@ -179,7 +179,7 @@ class DownloadTafTask(QgsTask):
                     layer.setLabeling(labeling)
                     # 3. Action Monografia
                     action = QgsAction(
-                        QgsAction.OpenUrl,
+                        QgsAction.ActionType.OpenUrl,
                         "Apri Monografia PF",
                         "[%Link_Monografia%]",
                         "",
@@ -194,26 +194,26 @@ class DownloadTafTask(QgsTask):
                     QgsMessageLog.logMessage(
                         f"Layer caricato: {layer_name}",
                         "TAF Italia",
-                        level=Qgis.Success,
+                        level=Qgis.MessageLevel.Success,
                     )
                 else:
                     QgsMessageLog.logMessage(
                         f"Layer non valido: {filepath}",
                         "TAF Italia",
-                        level=Qgis.Warning,
+                        level=Qgis.MessageLevel.Warning,
                     )
 
             QgsMessageLog.logMessage(
                 f"TAF {self.sigla}: {loaded} layer caricati su "
                 f"{len(self.generated_files)} file generati.",
                 "TAF Italia",
-                level=Qgis.Success,
+                level=Qgis.MessageLevel.Success,
             )
         else:
             QgsMessageLog.logMessage(
                 f"Errore TAF {self.sigla}: {self.exception}",
                 "TAF Italia",
-                level=Qgis.Critical,
+                level=Qgis.MessageLevel.Critical,
             )
 
 
@@ -413,7 +413,8 @@ class AgenziaTafPlugin:
 
         except Exception as e:
             QgsMessageLog.logMessage(
-                traceback.format_exc(), "TAF Italia", level=Qgis.Critical
+                traceback.format_exc(), "TAF Italia",
+                level=Qgis.MessageLevel.Critical
             )
             self.dlg.btn_scarica.setEnabled(True)
             QMessageBox.critical(

@@ -414,7 +414,7 @@ def create_geopackage(csv_filepath, gpkg_filepath, raw_mode=False):
             layer, gpkg_filepath, QgsCoordinateTransformContext(), options
         )
 
-        return error_code == QgsVectorFileWriter.NoError
+        return error_code == QgsVectorFileWriter.WriterError.NoError
     except Exception:
         import traceback
 
